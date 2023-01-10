@@ -23,14 +23,16 @@ app.post('/interactions', verifyKeyMiddleware(process.env.public_key), async(req
 			})
 
     if (interaction.data.custom_id == `verify`) {
-        await fetch(`https://discord.com/api/guilds/${interaction.guild_id}/members/${interaction.member.user.id}/roles/1042687123725221918`, {
+        const response1 = await fetch(`https://discord.com/api/guilds/${interaction.guild_id}/members/${interaction.member.user.id}/roles/1042687123725221918`, {
 			method: "PUT",
 			headers: {
 				"Authorization": `Bot ${process.env.token}`
 			}
 		})
+	const text1 = await response1.text()
+	    console.log(text1)
 
-		await fetch(`https://discord.com/api/webhooks/${interaction.application_id}/${interaction.token}/messages/@original`, {
+		const response2 = await fetch(`https://discord.com/api/webhooks/${interaction.application_id}/${interaction.token}/messages/@original`, {
 			method: "PATCH",
 			headers: {
 				"Authorization": `Bot ${process.env.token}`,
@@ -40,6 +42,9 @@ app.post('/interactions', verifyKeyMiddleware(process.env.public_key), async(req
 				content: "Granted You Access to the Server."
 			})
 		})
+		
+		const text2 = await response2.text()
+		console.log(`reponse2:\n` + text2)
 			
 		res.sendStatus(200)
     }
