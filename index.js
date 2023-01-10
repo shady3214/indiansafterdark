@@ -22,7 +22,7 @@ app.post('/interactions', verifyKeyMiddleware(process.env.public_key), async(req
 				})
 			})
 
-    if (Interaction.data.custom_id == `verify`) {
+    if (interaction.data.custom_id == `verify`) {
         await fetch(`https://discord.com/api/guilds/${interaction.guild_id}/members/${interaction.member.user.id}/roles/1042687123725221918`, {
 			method: "PUT",
 			headers: {
