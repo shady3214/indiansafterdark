@@ -44,3 +44,5 @@ app.post('/interactions', verifyKeyMiddleware(process.env.public_key), async(req
 		res.sendStatus(200)
     }
 })
+
+app.listen("3000", () => console.log('server is running'))
